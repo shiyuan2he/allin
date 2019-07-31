@@ -1,0 +1,24 @@
+
+
+               AAA               LLLLLLLLLLL             LLLLLLLLLLL                  IIIIIIIIIINNNNNNNN        NNNNNNNN
+              A:::A              L:::::::::L             L:::::::::L                  I::::::::IN:::::::N       N::::::N
+             A:::::A             L:::::::::L             L:::::::::L                  I::::::::IN::::::::N      N::::::N
+            A:::::::A            LL:::::::LL             LL:::::::LL                  II::::::IIN:::::::::N     N::::::N
+           A:::::::::A             L:::::L                 L:::::L                      I::::I  N::::::::::N    N::::::N
+          A:::::A:::::A            L:::::L                 L:::::L                      I::::I  N:::::::::::N   N::::::N
+         A:::::A A:::::A           L:::::L                 L:::::L                      I::::I  N:::::::N::::N  N::::::N
+        A:::::A   A:::::A          L:::::L                 L:::::L                      I::::I  N::::::N N::::N N::::::N
+       A:::::A     A:::::A         L:::::L                 L:::::L                      I::::I  N::::::N  N::::N:::::::N
+      A:::::AAAAAAAAA:::::A        L:::::L                 L:::::L                      I::::I  N::::::N   N:::::::::::N
+     A:::::::::::::::::::::A       L:::::L                 L:::::L                      I::::I  N::::::N    N::::::::::N
+    A:::::AAAAAAAAAAAAA:::::A      L:::::L         LLLLLL  L:::::L         LLLLLL       I::::I  N::::::N     N:::::::::N
+   A:::::A             A:::::A   LL:::::::LLLLLLLLL:::::LLL:::::::LLLLLLLLL:::::L     II::::::IIN::::::N      N::::::::N
+  A:::::A               A:::::A  L::::::::::::::::::::::LL::::::::::::::::::::::L     I::::::::IN::::::N       N:::::::N
+ A:::::A                 A:::::A L::::::::::::::::::::::LL::::::::::::::::::::::L     I::::::::IN::::::N        N::::::N
+AAAAAAA                   AAAAAAALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL     IIIIIIIIIINNNNNNNN         NNNNNNN
+
+
+
+
+         
+| Allin Application | Version: 1.0 |

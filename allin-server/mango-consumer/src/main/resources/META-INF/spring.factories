@@ -1,0 +1,1 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=org.platform.allin.consumer.RetryConfiguration
