@@ -1,9 +1,0 @@
-org/platform/allin/core/exception/AllinException.class
-org/platform/allin/core/page/PageRequest.class
-org/platform/allin/core/service/CurdService.class
-org/platform/allin/core/page/MybatisPageHelper.class
-org/platform/allin/core/AllinCoreApplication.class
-org/platform/allin/core/http/HttpStatus.class
-org/platform/allin/core/page/PageResult.class
-org/platform/allin/core/page/Param.class
-org/platform/allin/core/http/HttpResult.class
