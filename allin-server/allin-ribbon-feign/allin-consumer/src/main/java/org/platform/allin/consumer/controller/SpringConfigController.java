@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RefreshScope
 @RestController
+@RequestMapping("/config")
 class SpringConfigController {
     
-//    @Value("${hello}")
-//    private String hello;
-//
-//    @RequestMapping("/hello")
-//    public String from() {
-//        return this.hello;
-//    }
+    @Value("${hello}")
+    private String hello;
+
+    @RequestMapping("/hello")
+    public String from() {
+        return this.hello;
+    }
 }
