@@ -3,12 +3,8 @@ server:
 spring:
   application:
     name: allin-monitor
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        serviceName: ${spring.application.name}	# 注册到consul的服务名称
+  profiles:
+    active: dev
 # 开放健康检查接口
 management:
   endpoints:

@@ -30,4 +30,4 @@ allin:
       host: localhost
       userName: root
       password: 123456
-      database: mango
+      database: allin

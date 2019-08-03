@@ -101,15 +101,15 @@ public class PasswordEncoder {
 //		String salt = "helloworld";
 //		PasswordEncoder encoderMd5 = new PasswordEncoder(salt, "MD5");
 //		String encode = encoderMd5.encode("test");
-//		System.out.println(encode);
+//		log.info(encode);
 //		boolean passwordValid = encoderMd5.validPassword("1bd98ed329aebc7b2f89424b5a38926e", "test");
-//		System.out.println(passwordValid);
+//		log.info(passwordValid);
 //
 //		PasswordEncoder encoderSha = new PasswordEncoder(salt, "SHA");
 //		String pass2 = encoderSha.encode("test");
-//		System.out.println(pass2);
+//		log.info(pass2);
 //		boolean passwordValid2 = encoderSha.validPassword("1bd98ed329aebc7b2f89424b5a38926e", "test");
-//		System.out.println(passwordValid2);
+//		log.info(passwordValid2);
 //	}
 
 }

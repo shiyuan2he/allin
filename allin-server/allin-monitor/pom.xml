@@ -31,9 +31,14 @@
 		    <artifactId>spring-boot-admin-server-ui</artifactId>
 		</dependency>
 		<!--consul-->
-		<dependency>
+		<!--<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-		</dependency>
+		</dependency>-->
+        <!--eureka-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
 	</dependencies>
 </project>

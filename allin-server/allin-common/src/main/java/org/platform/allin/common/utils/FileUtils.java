@@ -1,5 +1,7 @@
 package org.platform.allin.common.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
@@ -8,6 +10,7 @@ import java.io.*;
  * @author Louis
  * @date Jan 14, 2019
  */
+@Slf4j
 public class FileUtils {
 
 	/**
@@ -106,8 +109,8 @@ public class FileUtils {
 	
 	public static void main(String[] args){
 //        File file = new File("D:/errlog.txt");
-//        System.out.println(readFile(file));
-        System.out.println(getClassPath());
-        System.out.println(getProjectPath());
+//        log.info(readFile(file));
+        log.info(getClassPath());
+        log.info(getProjectPath());
     }
 }

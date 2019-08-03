@@ -1,0 +1,34 @@
+server:
+  port: 8020
+spring:
+  application:
+    name: allin-config
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName: ${spring.application.name}	# 注册到consul的服务名称
+    config:
+      label: master  # git仓库分支
+      server:
+        git:
+          uri: https://github.com/shiyuan2he/allin.git  # 配置git仓库的地址
+          search-paths: allin-server/config-repo  # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: shiyuan2he  # git仓库的账号
+          password: heshiyuan98  # git仓库的密码
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8000"
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: username
+#    password: password
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

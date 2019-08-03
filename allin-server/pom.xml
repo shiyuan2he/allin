@@ -20,7 +20,30 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.version>1.0</project.version>
     </properties>
-    <!--<repositories>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.26</version>
+        </dependency>
+    </dependencies>
+    <repositories>
         <repository>
             <id>alimaven</id>
             <name>aliyun maven</name>
@@ -32,7 +55,11 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-    </repositories>-->
+        <repository>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
     <dependencyManagement>
         <dependencies>
             <!-- spring cloud version-->
@@ -149,6 +176,11 @@
         <module>allin-admin</module>
         <module>allin-registry</module>
         <module>allin-backup</module>
+        <module>allin-ribbon-feign</module>
+        <module>allin-config</module>
+        <module>allin-zipkin</module>
+        <module>allin-hystrix</module>
+        <module>allin-gateway</module>
     </modules>
 
     <build>

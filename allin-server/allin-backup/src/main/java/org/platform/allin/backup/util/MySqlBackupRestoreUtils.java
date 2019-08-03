@@ -1,5 +1,7 @@
 package org.platform.allin.backup.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -8,6 +10,7 @@ import java.io.IOException;
  * @author Louis
  * @date Jan 15, 2019
  */
+@Slf4j
 public class MySqlBackupRestoreUtils {
 
 	/**
@@ -41,7 +44,7 @@ public class MySqlBackupRestoreUtils {
 		Process process = Runtime.getRuntime().exec(getCommand(stringBuilder.toString()));
 		if (process.waitFor() == 0) {
 			// 0 表示线程正常终止
-			System.out.println("数据已经备份到 " + backupFilePath + " 文件中");
+			log.info("数据已经备份到 " + backupFilePath + " 文件中");
 			return true;
 		}
 		return false;
@@ -73,7 +76,7 @@ public class MySqlBackupRestoreUtils {
 		try {
 			Process process = Runtime.getRuntime().exec(getCommand(stringBuilder.toString()));
 			if (process.waitFor() == 0) {
-				System.out.println("数据已从 " + restoreFilePath + " 导入到数据库中");
+				log.info("数据已从 " + restoreFilePath + " 导入到数据库中");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -100,16 +103,16 @@ public class MySqlBackupRestoreUtils {
 		String password = "root@mariadb";
 		String database = "allin";
 		
-		System.out.println("开始备份");
+		log.info("开始备份");
 		String backupFolderPath = "c:/dev/";
 		String fileName = "allin.sql";
 		backup(host, userName, password, backupFolderPath, fileName, database);
-		System.out.println("备份成功");
+		log.info("备份成功");
 		
-		System.out.println("开始还原");
+		log.info("开始还原");
 		String restoreFilePath = "c:/dev/allin.sql";
 		restore(restoreFilePath, host, userName, password, database);
-		System.out.println("还原成功");
+		log.info("还原成功");
 
 	}
 
