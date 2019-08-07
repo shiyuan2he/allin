@@ -1,0 +1,58 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: allin-zuul
+  profiles:
+    active: dev
+zuul:
+  prefix: /api
+  routes:
+    ribbon:
+      path: /ribbon/**
+      serviceId: allin-consumer  # 转发到消费者 /ribbon/
+    feign:
+      path: /feign/**
+      serviceId: allin-consumer  # 转发到消费者 /feign/
+
+#
+#ribbon:
+#  eureka:
+#    enabled: true
+#  ReadTimeout: 60000 #请求处理的超时时间
+#  ConnectTimeout: 60000 #请求连接的超时时间
+#  MaxAutoRetries: 1 #对当前实例的重试次数
+#  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+#  OkToRetryOnAllOperations: true #对所有请求都进行重试
+#
+#hystrix:
+#  threadpool:
+#    default:
+#      coreSize: 1000 ##并发执行的最大线程数，默认10
+#      maxQueueSize: 1000 ##BlockingQueue的最大队列数
+#      queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 720000 #(ReadTimeout+ConnectTimeout)*(MaxAutoRetries+1)*(MaxAutoRetriesNextServer+1)
+#            # The Hystrix timeout of 480000ms for the command grain-buds-intelligence
+#            # is set lower than the combination of the Ribbon read and connect timeout, 720000ms.
+#
+##请求和响应GZIP压缩支持
+#feign:
+#  compression:
+#    request:
+#      enabled: true
+#      mime-types: text/xml,application/xml,application/json
+#      min-request-size: 2048
+#    response:
+#      enabled: true
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 60000
+#        readTimeout: 60000
+#  hystrix:
+#    enabled: true

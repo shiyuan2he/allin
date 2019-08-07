@@ -1,0 +1,7 @@
+server:
+  port: 8501
+spring:
+  application:
+    name: allin-hystrix
+  profiles:
+    active: dev

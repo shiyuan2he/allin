@@ -47,6 +47,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+        <!--spring boot 2.x比较新版本需要在消费端配置健康路径，以来actuator、hystrix-dashboard-->
 		<!--actuator-->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

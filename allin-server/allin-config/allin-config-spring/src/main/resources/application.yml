@@ -11,7 +11,7 @@ spring:
         url: "http://localhost:8000"
   cloud:
     config:
-      label: master  # git仓库分支
+#      label: master  # git仓库分支
       server:
         git:
           uri: https://github.com/shiyuan2he/allin.git  # 配置git仓库的地址

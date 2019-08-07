@@ -179,8 +179,7 @@
         <module>allin-ribbon-feign</module>
         <module>allin-config</module>
         <module>allin-zipkin</module>
-        <module>allin-hystrix</module>
-        <module>allin-gateway</module>
+        <module>allin-api-gateway</module>
     </modules>
 
     <build>

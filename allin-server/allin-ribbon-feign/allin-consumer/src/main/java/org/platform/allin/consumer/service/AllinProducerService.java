@@ -4,10 +4,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * fallback = AllinProducerHystrix.class
+ *
  * @author heshiyuan
  */
-@FeignClient(name = "allin-producer")
+@FeignClient(name = "allin-producer", fallback = AllinProducerHystrix.class)
 public interface AllinProducerService {
 
     @RequestMapping("/hello")
