@@ -1,15 +1,7 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8501
 spring:
-  boot:
-    admin:
-      client:
-        url: "http://localhost:8000"
-#  cloud:
-#    consul:
-#      host: localhost
-#      port: 8500
-#      discovery:
-#        serviceName: allin-consumer	# 注册到consul的服务名称
+  application:
+    name: allin-hystrix
+
+

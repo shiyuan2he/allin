@@ -1,16 +1,45 @@
-server:
-  port: 8003
-spring:
-  application:
-    name: allin-producer
-  profiles:
-    active: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/
+  instance:
+    prefer-ip-address: true
 # 开放健康检查接口
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: hystrix.stream
   endpoint:
     health:
+      enabled: true
       show-details: ALWAYS
+feign:
+  hystrix:
+    enabled: true
+spring:
+  profiles:
+    active: dev
+#  boot:
+#    admin:
+#      client:
+#        url: "http://localhost:8000"
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        serviceName: allin-consumer	# 注册到consul的服务名称
+#    config:
+#      discovery:
+#        enabled: true  # 开启服务发现
+#        serviceId: allin-config # 配置中心服务名称
+#      name: consumer  # 对应{application}部分
+#      profile: dev  # 对应{profile}部分
+#      label: master  # 对应git的分支，如果配置中心使用的是本地存储，则该参数无用
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: username
+#    password: password
+

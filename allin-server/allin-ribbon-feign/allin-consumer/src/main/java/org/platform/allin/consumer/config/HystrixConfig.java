@@ -22,13 +22,13 @@ public class HystrixConfig {
      * 只要在自己的项目里配置上下面的servlet就可以了
      * @return
      */
-    @Bean
-    public ServletRegistrationBean getServlet() {
-        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-        registrationBean.setLoadOnStartup(1);
-        registrationBean.addUrlMappings("/hystrix.stream");
-        registrationBean.setName("HystrixMetricsStreamServlet");
-        return registrationBean;
-    }
+//    @Bean
+//    public ServletRegistrationBean getServlet() {
+//        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+//        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+//        registrationBean.setLoadOnStartup(1);
+//        registrationBean.addUrlMappings("/hystrix.stream");
+//        registrationBean.setName("HystrixMetricsStreamServlet");
+//        return registrationBean;
+//    }
 }

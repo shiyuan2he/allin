@@ -1,6 +1,6 @@
 package org.platform.allin.consumer.controller;
 
-import org.platform.allin.consumer.service.AllinProducerService;
+import org.platform.allin.consumer.service.FeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heshiyuan
  */
 @RestController
-public class FeignHelloController {
+@RequestMapping("/feign")
+public class FeignController {
 
     @Autowired
-    private AllinProducerService allinProducerService;
+    FeignService feignService;
     
-    @RequestMapping("/feign/call")
+    @RequestMapping("/call")
     public String call() {
-        // 像调用本地服务一样
-        return allinProducerService.hello();
+        return feignService.feignInvoke();
     }
-    
 }

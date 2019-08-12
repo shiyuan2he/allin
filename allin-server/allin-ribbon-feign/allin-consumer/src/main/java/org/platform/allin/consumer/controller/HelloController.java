@@ -27,5 +27,8 @@ public class HelloController {
         log.info(callServiceResult);
         return callServiceResult;
     }
-
+    @RequestMapping(value = "/consumer/info")
+    public String consumerInfo(){
+        return "this is consumer info";
+    }
 }

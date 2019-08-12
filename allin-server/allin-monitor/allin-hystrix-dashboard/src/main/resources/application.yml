@@ -1,7 +1,27 @@
-server:
-  port: 8501
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/
+  instance:
+    prefer-ip-address: true
+
 spring:
-  application:
-    name: allin-hystrix
   profiles:
     active: dev
+#  boot:
+#    admin:
+#      client:
+#        url: "http://localhost:8000"
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        serviceName: allin-consumer	# 注册到consul的服务名称
+management:
+#  security:
+#    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
