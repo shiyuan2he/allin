@@ -29,10 +29,10 @@
 		    <artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
         <!--spring-boot-admin-->
-       	<dependency>
+       <!--	<dependency>
 		    <groupId>de.codecentric</groupId>
 		    <artifactId>spring-boot-admin-starter-client</artifactId>
-		</dependency>
+		</dependency>-->
 		<!--consul-->
 	    <!--<dependency>
 	        <groupId>org.springframework.cloud</groupId>
@@ -48,10 +48,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--hystrix-dashboard-->
+        <!--hystrix-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
 	</dependencies>
 </project>

@@ -28,10 +28,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
         <!--spring-boot-admin-->
-           <dependency>
+         <!--  <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
-        </dependency>
+        </dependency>-->
         <!--consul-->
         <!--<dependency>
             <groupId>org.springframework.cloud</groupId>

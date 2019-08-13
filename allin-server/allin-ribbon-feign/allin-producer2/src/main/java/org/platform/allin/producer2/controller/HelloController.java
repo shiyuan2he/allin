@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heshiyuan
  */
 @RestController
+@RequestMapping(value = "/producer2")
 public class HelloController {
 
     @RequestMapping("/hello")
