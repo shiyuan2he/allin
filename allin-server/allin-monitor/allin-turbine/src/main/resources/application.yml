@@ -1,5 +1,3 @@
-server:
-  port: 8502
 turbine:
   app-config: allin-consumer,allin-producer,allin-producer2 # 指定了需要收集监控信息的服务名，多个以“,”进行区分
   instanceUrlSuffix: hystrix.stream    # 指定收集路径
