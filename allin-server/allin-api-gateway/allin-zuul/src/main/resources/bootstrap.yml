@@ -3,6 +3,8 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 spring:
+  application:
+    name: allin-zuul
   boot:
     admin:
       client:
