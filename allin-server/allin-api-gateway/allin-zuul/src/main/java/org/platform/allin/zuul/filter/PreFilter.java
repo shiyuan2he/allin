@@ -1,18 +1,22 @@
 package org.platform.allin.zuul.filter;
-import javax.servlet.http.HttpServletRequest;
-
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.http.ResponseEntity;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
 /**
+ * 预处理filter，验证cookie，header信息
  * @author heshiyuan
  */
 @Slf4j
-public class AccessSessionFilter extends ZuulFilter {
+public class PreFilter extends ZuulFilter {
     /**
      * 定义filter的类型，有pre、route、post、error四种
      * pre：在zuul按照规则路由到下级服务之前执行，如果需要对请求进行预处理，不如鉴权，限流等都应考虑再次filter执行
@@ -33,7 +37,7 @@ public class AccessSessionFilter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return 1;
+        return 0;
     }
 
     /**
@@ -50,7 +54,16 @@ public class AccessSessionFilter extends ZuulFilter {
         // filter需要执行的具体操作
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        log.info("【AccessSessionFilter】ok, 放行路径:{}", request.getRequestURI());
+        Cookie[] cookies = request.getCookies();
+        if(null==cookies||cookies.length<=0){
+            log.warn("【PreFilter】请求地址：{};cookie中没有数据，系统禁止无状态请求", request.getRequestURI());
+            // 对该请求禁止路由，也就是禁止访问下游服务
+            ctx.setSendZuulResponse(false);
+            // 摸清楚跟http response区别 设定ResponseBody，供PostFilter使用
+            ctx.setResponseBody("请求中没有cookie 信息");
+        }else{
+            log.info("【PreFilter】放行:{}", request.getRequestURI());
+        }
         return null;
     }
 }

@@ -180,6 +180,7 @@
         <module>allin-config</module>
         <module>allin-zipkin</module>
         <module>allin-api-gateway</module>
+        <module>allin-oauth2</module>
     </modules>
 
     <build>

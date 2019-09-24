@@ -1,18 +1,20 @@
 package org.platform.allin.zuul.filter;
-import javax.servlet.http.HttpServletRequest;
-
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 /**
+ * 预处理filter，验证cookie，header信息
  * @author heshiyuan
  */
 @Slf4j
-public class AccessSessionFilter extends ZuulFilter {
+public class PostFilter extends ZuulFilter {
     /**
      * 定义filter的类型，有pre、route、post、error四种
      * pre：在zuul按照规则路由到下级服务之前执行，如果需要对请求进行预处理，不如鉴权，限流等都应考虑再次filter执行
@@ -24,7 +26,7 @@ public class AccessSessionFilter extends ZuulFilter {
      */
     @Override
     public String filterType() {
-        return FilterConstants.PRE_TYPE;
+        return FilterConstants.POST_TYPE;
     }
 
     /**
@@ -33,7 +35,7 @@ public class AccessSessionFilter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return 1;
+        return 0;
     }
 
     /**
@@ -47,10 +49,21 @@ public class AccessSessionFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        // filter需要执行的具体操作
+        /**
+         * 此处检查有无定制ResponseBody，以及设置响应字符集，避免中文乱码，此外还设置了http状态码
+         */
         RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-        log.info("【AccessSessionFilter】ok, 放行路径:{}", request.getRequestURI());
+        ctx.getResponse().setContentType("application/json");
+        ctx.getResponse().setCharacterEncoding("UTF-8");
+        String responseBody = ctx.getResponseBody();
+        HttpServletRequest request  = ctx.getRequest();
+        log.info("【PostFilter】放行:{}", request.getRequestURI());
+        if(null!=responseBody){
+            // 设定返回响应码
+            ctx.setResponseStatusCode(500);
+            //  替换响应报文
+            ctx.setResponseBody(responseBody);
+        }
         return null;
     }
 }

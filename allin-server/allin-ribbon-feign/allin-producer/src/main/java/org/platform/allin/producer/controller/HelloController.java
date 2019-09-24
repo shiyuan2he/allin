@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,19 +18,31 @@ import java.util.Map;
  * @author heshiyuan
  */
 @RestController
-@RequestMapping("/producer")
+@RequestMapping("/hello")
 public class HelloController {
     @Autowired
     ConsumerService consumerService;
-    @RequestMapping("/hello")
+    @GetMapping
     public String hello() {
         return "hello, this is Allin-producer !";
     }
 
-    @GetMapping(value = "/consumer/info")
+   /* @GetMapping(value = "/consumer/info")
     public ResponseEntity<Map> getConsumerInfo(){
         Map<String, String> returnMap = new HashMap<>();
         returnMap.put("data", consumerService.getConsumerInfo());
         return ResponseEntity.ok(returnMap);
+    }*/
+
+    @GetMapping("/test")
+    public String test(HttpServletRequest request) {
+        System.out.println("----------------header----------------");
+        Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = (String) headerNames.nextElement();
+            System.out.println(key + ": " + request.getHeader(key));
+        }
+        System.out.println("----------------header----------------");
+        return "hello world";
     }
 }

@@ -1,7 +1,5 @@
 package org.platform.allin.producer.service;
 
-import org.platform.allin.producer.dao.ConsumerDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +10,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ConsumerService {
-    @Autowired
-    ConsumerDao consumerDao;
-    public String getConsumerInfo(){
-        return consumerDao.consumerInfo();
-    }
+//    @Autowired
+//    ConsumerDao consumerDao;
+//    public String getConsumerInfo(){
+//        return consumerDao.consumerInfo();
+//    }
 }

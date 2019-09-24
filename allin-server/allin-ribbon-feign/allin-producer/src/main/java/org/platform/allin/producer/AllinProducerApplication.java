@@ -9,8 +9,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
  * @author heshiyuan
  */
-@EnableHystrix
-@EnableFeignClients
+//@EnableHystrix
+//@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class AllinProducerApplication {

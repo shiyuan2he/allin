@@ -4,69 +4,106 @@ spring:
 zuul:
   prefix: /api
   routes:
-    ribbon:
-      path: /ribbon/**
-      serviceId: allin-consumer  # 转发到消费者 /ribbon/
-    feign:
-      path: /feign/**
-      serviceId: allin-consumer  # 转发到消费者 /feign/
-  ribbonIsolationStrategy: THREAD
-    threadPool:
-      useSeparateThreadPools: true
-      threadPoolKeyPrefix: zuulgateway
-    max:
-      host:
-        max-per-route-connections: 200
-        max-total-connections: 500
-    host:
-      socket-timeout-millis: 5000
-      connect-timeout-millis: 10000
+    producer:
+      path: /producer/**
+      serviceId: allin-producer
+    producer2:
+      path: /producer2/**
+      serviceId: allin-producer2
+#  retryable: true # 重试机制开启 需要配合ribbon MaxAutoRetries MaxAutoRetriesNextServer使用
+#  add-host-header: true # 隐藏下游服务的host
+# 加上ignored之后，zuul在拉取服务列表，创建映射规则的时候，就会忽略掉allin-consumer，/test/**接口
+#  ignored-services: allin-consumer # 忽略的服务
+#  ignored-patterns: /test/** # 忽略的接口
+#  routes:
+#    allin-ribbon:
+#      path: /ribbon/**
+#      serviceId: allin-consumer  # 转发到消费者 /ribbon/ 默认使用eureka的基本负载均衡功能
+#      sensitiveHeader: Cookie,Set-Cookie,Authorization # 指定敏感头，切断它和下层服务之间的交互
+#    allin-feign:
+#      path: /feign/**
+#      serviceId: allin-consumer  # 转发到消费者 /feign/
+#    allin-zuul:
+#      path: /zuul/**
+#      url: forward:/zuul # 本地跳转
+#  ribbonIsolationStrategy: THREAD
+#    threadPool:
+#      useSeparateThreadPools: true
+#      threadPoolKeyPrefix: zuulgateway
+#    max:
+#      host:
+#        max-per-route-connections: 200
+#        max-total-connections: 500
+#    host:
+#      socket-timeout-millis: 5000
+#      connect-timeout-millis: 10000
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
-ribbon:
-  eureka:
-    enabled: true
-  ReadTimeout: 3000 #请求处理的超时时间
-  ConnectTimeout: 3000 #请求连接的超时时间
-  MaxAutoRetries: 1 #对当前实例的重试次数
-  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
-  OkToRetryOnAllOperations: true #对所有请求都进行重试
 
-hystrix:
-  threadpool:
-    default:
-      coreSize: 20 #并发执行的最大线程数，默认10
-      maximumSize: 50
-      maxQueueSize: -1 #BlockingQueue的最大队列数
-      allowMaximumSizeToDivergeFromCoreSize: true
-      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: false
-        isolation:
-          thread:
-            interruptOnTimeout: false
-            timeoutInMilliseconds: 36000 #(ReadTimeout+ConnectTimeout)*(MaxAutoRetries+1)*(MaxAutoRetriesNextServer+1)
+
+# 不使用ribbon的负载均衡策略，自定义负载均衡
+#allin-ribbon:
+#  ribbon:
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#    listOfServers: localhost:8001,localhost:8002
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream
+#ribbon:
+#  eureka:
+#    enabled: false #  禁止Ribbon使用eureka的负载均衡，而是使用自己的负载均衡策略 需配合NIWSServerListClassName使用
+#  ReadTimeout: 3000 #请求处理的超时时间
+#  ConnectTimeout: 3000 #请求连接的超时时间
+#  MaxAutoRetries: 1 #对当前实例的重试次数
+#  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+#  OkToRetryOnAllOperations: true #对所有请求都进行重试
+
+#hystrix:
+#  threadPool:
+#    default:
+#      coreSize: 20 #并发执行的最大线程数，默认10
+#      maximumSize: 50
+#      maxQueueSize: -1 #BlockingQueue的最大队列数
+#      allowMaximumSizeToDivergeFromCoreSize: true
+#      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: false
+#        isolation:
+#          thread:
+#            interruptOnTimeout: false
+#            timeoutInMilliseconds: 36000 #(ReadTimeout+ConnectTimeout)*(MaxAutoRetries+1)*(MaxAutoRetriesNextServer+1)
 
 #请求和响应GZIP压缩支持
-feign:
-  compression:
-    request:
-      enabled: true
-      mime-types: text/xml,application/xml,application/json
-      min-request-size: 2048
-    response:
-      enabled: true
-  client:
-    config:
-      default:
-        connectTimeout: 3000
-        readTimeout: 3000
-  hystrix:
-    enabled: true
+#feign:
+#  compression:
+#    request:
+#      enabled: true
+#      mime-types: text/xml,application/xml,application/json
+#      min-request-size: 2048
+#    response:
+#      enabled: true
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 3000
+#        readTimeout: 3000
+#  hystrix:
+#    enabled: true
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      access-token-uri: http://localhost:7777/pass/oauth/token #令牌端点
+      user-authorization-uri: http://localhost:7777/pass/oauth/authorize #授权端点
+      client-id: zuul_server #OAuth2客户端ID
+      client-secret: secret #OAuth2客户端密钥
+    resource:
+      jwt:
+        key-value: SpringCloud123 #使用对称加密方式，默认算法为HS256

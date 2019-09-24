@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
  * @date 2019/8/3 10:17
  * @author heshiyuan
  */
-@EnableHystrix
+//@EnableHystrix
 @EnableDiscoveryClient
 @SpringBootApplication
 public class AllinProducer2Application {
