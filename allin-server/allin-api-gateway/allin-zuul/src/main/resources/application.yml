@@ -1,45 +1,6 @@
 spring:
   profiles:
     active: dev
-zuul:
-  prefix: /api
-  routes:
-    producer:
-      path: /producer/**
-      serviceId: allin-producer
-    producer2:
-      path: /producer2/**
-      serviceId: allin-producer2
-#  retryable: true # 重试机制开启 需要配合ribbon MaxAutoRetries MaxAutoRetriesNextServer使用
-#  add-host-header: true # 隐藏下游服务的host
-# 加上ignored之后，zuul在拉取服务列表，创建映射规则的时候，就会忽略掉allin-consumer，/test/**接口
-#  ignored-services: allin-consumer # 忽略的服务
-#  ignored-patterns: /test/** # 忽略的接口
-#  routes:
-#    allin-ribbon:
-#      path: /ribbon/**
-#      serviceId: allin-consumer  # 转发到消费者 /ribbon/ 默认使用eureka的基本负载均衡功能
-#      sensitiveHeader: Cookie,Set-Cookie,Authorization # 指定敏感头，切断它和下层服务之间的交互
-#    allin-feign:
-#      path: /feign/**
-#      serviceId: allin-consumer  # 转发到消费者 /feign/
-#    allin-zuul:
-#      path: /zuul/**
-#      url: forward:/zuul # 本地跳转
-#  ribbonIsolationStrategy: THREAD
-#    threadPool:
-#      useSeparateThreadPools: true
-#      threadPoolKeyPrefix: zuulgateway
-#    max:
-#      host:
-#        max-per-route-connections: 200
-#        max-total-connections: 500
-#    host:
-#      socket-timeout-millis: 5000
-#      connect-timeout-millis: 10000
-
-
-
 # 不使用ribbon的负载均衡策略，自定义负载均衡
 #allin-ribbon:
 #  ribbon:
@@ -95,15 +56,4 @@ zuul:
 #        readTimeout: 3000
 #  hystrix:
 #    enabled: true
-security:
-  basic:
-    enabled: false
-  oauth2:
-    client:
-      access-token-uri: http://localhost:7777/pass/oauth/token #令牌端点
-      user-authorization-uri: http://localhost:7777/pass/oauth/authorize #授权端点
-      client-id: zuul_server #OAuth2客户端ID
-      client-secret: secret #OAuth2客户端密钥
-    resource:
-      jwt:
-        key-value: SpringCloud123 #使用对称加密方式，默认算法为HS256
+

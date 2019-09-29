@@ -26,20 +26,21 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**").authenticated()
-                .antMatchers(HttpMethod.GET, "/**").hasAuthority("WRIGHT_WRITE");
+                .antMatchers(HttpMethod.GET, "/hello/**")
+                .hasAuthority("WRIGTH_READ");
     }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources
-                .resourceId("wright")
+                .resourceId("WRIGTH")
                 .tokenStore(jwtTokenStore());
     }
 
     @Bean
     protected JwtAccessTokenConverter jwtTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("SpringCloud123");
+        converter.setSigningKey("springcloud123");
         return converter;
     }
 

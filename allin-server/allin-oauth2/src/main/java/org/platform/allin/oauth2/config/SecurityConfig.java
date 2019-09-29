@@ -26,15 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("guest").password("guest").authorities("WRIGHT_READ")
+                .withUser("guest").password("guest").authorities("WRIGTH_READ")
                 .and()
-                .withUser("admin").password("admin").authorities("WRIGHT_READ", "WRIGHT_WRITE");
+                .withUser("admin").password("admin").authorities("WRIGTH_READ", "WRIGTH_WRITE");
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }*/
     @Bean
     public static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();

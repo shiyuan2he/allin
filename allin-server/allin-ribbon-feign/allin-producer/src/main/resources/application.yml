@@ -5,18 +5,18 @@ eureka:
   instance:
     prefer-ip-address: true
 # 开放健康检查接口
-management:
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
-  endpoint:
-    health:
-      enabled: true
-      show-details: ALWAYS
-feign:
-  hystrix:
-    enabled: true
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream
+#  endpoint:
+#    health:
+#      enabled: true
+#      show-details: ALWAYS
+#feign:
+#  hystrix:
+#    enabled: true
 spring:
   profiles:
     active: dev

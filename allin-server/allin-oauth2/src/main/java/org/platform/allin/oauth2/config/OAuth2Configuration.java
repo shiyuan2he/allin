@@ -22,7 +22,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -32,9 +32,8 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
                 .inMemory()
                 .withClient("zuul_server")
                 .secret("secret")
-                .scopes("all","wright","read")
-                .autoApprove(true)
-                .authorities("WRIGHT_READ", "WRIGHT_WRITE")
+                .scopes("WRIGTH", "read").autoApprove(true)
+                .authorities("WRIGTH_READ", "WRIGTH_WRITE")
                 .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code")
                 .redirectUris("http://localhost:8080/login")
                 ;
@@ -56,7 +55,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     @Bean
     protected JwtAccessTokenConverter jwtTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("SpringCloud123");
+        converter.setSigningKey("springcloud123");
         return converter;
     }
 }

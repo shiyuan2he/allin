@@ -27,6 +27,10 @@ public class HelloController {
         return "hello, this is Allin-producer !";
     }
 
+    @GetMapping(value = "/add")
+    public Integer add(Integer a, Integer b) {
+        return a + b;
+    }
    /* @GetMapping(value = "/consumer/info")
     public ResponseEntity<Map> getConsumerInfo(){
         Map<String, String> returnMap = new HashMap<>();
@@ -34,7 +38,7 @@ public class HelloController {
         return ResponseEntity.ok(returnMap);
     }*/
 
-    @GetMapping("/test")
+    @GetMapping(value = "/test", produces="application/json; charset=utf-8")
     public String test(HttpServletRequest request) {
         System.out.println("----------------header----------------");
         Enumeration headerNames = request.getHeaderNames();

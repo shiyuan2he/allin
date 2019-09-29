@@ -1,3 +1,5 @@
+server:
+  port: 8080
 eureka:
   client:
     service-url:
@@ -7,6 +9,17 @@ eureka:
 spring:
   application:
     name: allin-zuul
+  redis:
+    jedis:
+      pool:
+        min-idle: 1
+        max-idle: 10
+        max-active: 20
+        max-wait: 1000ms
+        maxWaitMillis: 5000
+        MaxTotal: 50
+    host: localhost
+    port: 6379
 #  boot:
 #    admin:
 #      client:
@@ -17,3 +30,72 @@ spring:
 #      port: 8500
 #      discovery:
 #        serviceName: allin-consumer	# 注册到consul的服务名称
+
+zuul:
+  prefix: /api
+  routes:
+    producer:
+      path: /producer/**
+      serviceId: allin-producer
+    producer2:
+      path: /producer2/**
+      serviceId: allin-producer2
+  ratelimit: # https://my.oschina.net/wuweixiang/blog/3011756   参考博客
+    key-prefix: ratelimit #按粒度拆分的临时变量key前缀，redis key前缀
+    enabled: true #启用开关
+    repository: redis #key存储类型，默认是IN_MEMORY本地内存，此外还有多种形式
+    behind-proxy: true #表示代理之后
+    default-policy: #全局限流策略，可单独细化到服务粒度 # 3秒内访问次数不得查过2次且访问时间不得超过4秒
+      limit: 2 #在一个单位时间窗口的请求数量
+      quota: 4 #在一个单位时间窗口的请求时间限制
+      refresh-interval: 3 #单位时间窗口 3秒内请求不超过两次
+      type:
+        - user #可指定用户粒度
+        - origin #可指定客户端地址粒度
+        - url #可指定url粒度
+    policies:
+      allin-producer:
+        limit: 5 #在一个单位时间窗口的请求数量
+        quota: 2 #在一个单位时间窗口的请求时间限制
+        refresh-interval: 3 #单位时间窗口 3秒内请求不超过两次
+        type:
+          - url #可指定url粒度
+#  retryable: true # 重试机制开启 需要配合ribbon MaxAutoRetries MaxAutoRetriesNextServer使用
+#  add-host-header: true # 隐藏下游服务的host
+# 加上ignored之后，zuul在拉取服务列表，创建映射规则的时候，就会忽略掉allin-consumer，/test/**接口
+#  ignored-services: allin-consumer # 忽略的服务
+#  ignored-patterns: /test/** # 忽略的接口
+#  routes:
+#    allin-ribbon:
+#      path: /ribbon/**
+#      serviceId: allin-consumer  # 转发到消费者 /ribbon/ 默认使用eureka的基本负载均衡功能
+#      sensitiveHeader: Cookie,Set-Cookie,Authorization # 指定敏感头，切断它和下层服务之间的交互
+#    allin-feign:
+#      path: /feign/**
+#      serviceId: allin-consumer  # 转发到消费者 /feign/
+#    allin-zuul:
+#      path: /zuul/**
+#      url: forward:/zuul # 本地跳转
+#  ribbonIsolationStrategy: THREAD
+#    threadPool:
+#      useSeparateThreadPools: true
+#      threadPoolKeyPrefix: zuulgateway
+#    max:
+#      host:
+#        max-per-route-connections: 200
+#        max-total-connections: 500
+#    host:
+#      socket-timeout-millis: 5000
+#      connect-timeout-millis: 10000
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      access-token-uri: http://localhost:7777/pass/oauth/token #令牌端点
+      user-authorization-uri: http://localhost:7777/pass/oauth/authorize #授权端点
+      client-id: zuul_server #OAuth2客户端ID
+      client-secret: secret #OAuth2客户端密钥
+    resource:
+      jwt:
+        key-value: springcloud123 #使用对称加密方式，默认算法为HS256

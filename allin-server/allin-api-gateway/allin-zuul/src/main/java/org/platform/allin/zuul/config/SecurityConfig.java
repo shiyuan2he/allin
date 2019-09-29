@@ -14,15 +14,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @path allin-server/org.platform.allin.zuul.config
  * @date 2019/9/19 22:20
  */
-@Configuration
 @Order(101)
+@Configuration
 @EnableOAuth2Sso
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/login", "/producer/**", "/hello/**", "/test").permitAll()
+                    .antMatchers("/login", "/producer/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .csrf()

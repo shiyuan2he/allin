@@ -55,7 +55,7 @@ public class PreFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         Cookie[] cookies = request.getCookies();
-        if(null==cookies||cookies.length<=0){
+        /*if(null==cookies||cookies.length<=0){
             log.warn("【PreFilter】请求地址：{};cookie中没有数据，系统禁止无状态请求", request.getRequestURI());
             // 对该请求禁止路由，也就是禁止访问下游服务
             ctx.setSendZuulResponse(false);
@@ -63,7 +63,9 @@ public class PreFilter extends ZuulFilter {
             ctx.setResponseBody("请求中没有cookie 信息");
         }else{
             log.info("【PreFilter】放行:{}", request.getRequestURI());
-        }
+
+        }*/
+        log.info("【PreFilter】放行:{}", request.getRequestURI());
         return null;
     }
 }
